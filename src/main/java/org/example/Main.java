@@ -22,12 +22,14 @@ public class Main {
         peliculas.add(new Pelicula("Jurassic Park", 8.1,"Un parque temático con dinosaurios clonados se convierte en un caos."));
         peliculas.add(new Pelicula("Titanic", 7.9, "Una historia de amor florece a bordo del famoso barco condenado."));
         peliculas.add(new Pelicula("The Avengers", 8.0,"Un grupo de héroes debe unirse para salvar al mundo de una amenaza alienígena."));
+
+
     }
 
-    public List<Pelicula> filtrarPorRate(List<Pelicula> pelis, double rate) {
+    public List<Pelicula> filtrarPorRate(double rate) {
         List<Pelicula> resultado = new ArrayList<>();
 
-        for (Pelicula p : pelis) {
+        for (Pelicula p : peliculas) {
             if (p.rate >= rate) {   // ACCESO DIRECTO AL ATRIBUTO
                 resultado.add(p);
             }
