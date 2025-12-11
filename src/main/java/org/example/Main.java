@@ -66,7 +66,6 @@ public class Main {
                 System.out.println("Please type a number.");
                 sc.nextLine();
             }
-            break;
         }while(falloLectura);
 
         if (userSelection == 5){
