@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Main {
-    public static void main(String[] args) {
-        List<Pelicula> peliculas = new ArrayList<>();
+    static List<Pelicula> peliculas = new ArrayList<>();
 
+    public static void main(String[] args) {
         peliculas.add(new Pelicula("El Señor de los Anillos: La Comunidad del Anillo", 9.0,"Un grupo de héroes se embarca en una misión para destruir un anillo maligno."));
         peliculas.add(new Pelicula("Inception", 8.8,"Un ladrón especializado en entrar en los sueños intenta realizar el golpe definitivo."));
         peliculas.add(new Pelicula("Interstellar", 8.6,"Exploradores viajan a través de un agujero de gusano en busca de un nuevo hogar para la humanidad."));
