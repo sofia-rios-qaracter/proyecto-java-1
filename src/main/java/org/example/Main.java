@@ -37,4 +37,45 @@ public class Main {
 
         return resultado;
     }
+
+    public List<Pelicula> filtrarPorNombre(List<Pelicula> pelis, String nombreBuscado) {
+
+        List<Pelicula> resultado = new ArrayList<>();
+
+        for (Pelicula p : pelis) {
+            // Usamos equalsIgnoreCase para ignorar mayúsculas/minúsculas
+            if (p.name.equalsIgnoreCase(nombreBuscado)) {
+                resultado.add(p);
+            }
+        }
+
+        return resultado;
+    }
+
+    public List<Pelicula> filtrarPorCategoria(String categoriaBuscada) {
+
+        List<Pelicula> resultado = new ArrayList<>();
+
+        for (Pelicula p : peliculas) {
+            // equalsIgnoreCase → ignora mayúsculas/minúsculas
+            if (p.category.equalsIgnoreCase(categoriaBuscada)) {
+                resultado.add(p);
+            }
+        }
+
+        return resultado;
+    }
+
+    public void mostrarPeliculas() {
+        System.out.println("\n===== LISTA DE PELÍCULAS =====");
+
+        for (Pelicula p : peliculas) {
+            System.out.println("Título: " + p.name);
+            System.out.println("Rate: " + p.rate);
+            System.out.println("Categoría: " + p.category);
+            System.out.println("Descripción: " + p.description);
+            System.out.println("-------------------------------");
+        }
+    }
+
 }
