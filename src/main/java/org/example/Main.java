@@ -1,7 +1,9 @@
 package org.example;
 
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.List;
+import java.util.Scanner;
 
 public class Main {
     static List<Pelicula> peliculas = new ArrayList<>();
@@ -23,7 +25,55 @@ public class Main {
         peliculas.add(new Pelicula("Titanic", 7.9,"Drama", "Una historia de amor florece a bordo del famoso barco condenado."));
         peliculas.add(new Pelicula("The Avengers", 8.0,"Superheroes","Un grupo de héroes debe unirse para salvar al mundo de una amenaza alienígena."));
 
+        Scanner sc = new Scanner(System.in);
+        boolean repeat = true;
 
+        while (repeat){
+            repeat = userUI(sc);
+        }
+
+        sc.close();
+    }
+
+    public static boolean userUI(Scanner sc){
+        int userSelection = 0;
+        boolean falloLectura = false;
+        boolean repetir = true;
+
+        do{
+            falloLectura = false;
+            System.out.println();
+            System.out.println("--------------------------------------------------");
+            System.out.println("Welcome to the video club. What do you want to do?");
+            System.out.println("1. Show all films.");
+            System.out.println("2. Look for film.");
+            System.out.println("3. Look for films in a category.");
+            System.out.println("4. Add a new film.");
+            System.out.println("5. Close the program.");
+
+            try {
+                userSelection = sc.nextInt();
+                System.out.println("User selection: "+userSelection);
+                sc.nextLine();
+
+                if(userSelection > 5 || userSelection < 1){
+                    falloLectura = true;
+                    System.out.println("Please just type a number between the avaibale options");
+                }
+            }catch (InputMismatchException e){
+                falloLectura = true;
+                System.out.println("--------------------------------------------------");
+                System.out.println("Please type a number.");
+                sc.nextLine();
+            }
+            break;
+        }while(falloLectura);
+
+        if (userSelection == 5){
+            repetir = false;
+        }
+
+        return repetir;
     }
 
     public List<Pelicula> filtrarPorRate(double rate) {
