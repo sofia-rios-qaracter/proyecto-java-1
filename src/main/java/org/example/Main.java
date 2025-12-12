@@ -43,7 +43,7 @@ public class Main {
         String message = (new StringBuilder("\n--------------------------------------------------\n")
                 .append("Welcome to the video club. What do you want to do?\n")
                 .append("1. Show all films.\n")
-                .append("2. Look for a film.\n")
+                .append("2. Look for film.\n")
                 .append("3. Look for films in a category.\n"))
                 .append("4. Add a new film\n")
                 .append("5. Close the program.\n")
@@ -62,6 +62,24 @@ public class Main {
 
         if (userSelection == 5){ // 5. Close the program
             repetir = false;
+        } else if(userSelection == 1){
+            mostrarPeliculas();
+
+        }else if(userSelection == 2){
+            String nombre = readString(sc, "Type the film name:", "Please enter a valid text.");
+
+            List<Pelicula> resultado = filtrarPorNombre(peliculas, nombre);
+
+            if (resultado.isEmpty()) {
+                System.out.println("No films found with that name.");
+            } else {
+                System.out.println("\n=== RESULTS ===");
+                for (Pelicula p : resultado) {
+                    System.out.println(p);
+                }
+            }
+
+        }else if(userSelection == 3){
         } else if(userSelection == 1){ // 1. Show all films.
 
         }else if(userSelection == 2){ // 2. Look for a film.
