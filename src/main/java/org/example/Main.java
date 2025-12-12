@@ -37,42 +37,62 @@ public class Main {
 
     public static boolean userUI(Scanner sc){
         int userSelection = 0;
-        boolean falloLectura = false;
+        boolean posibleOption = true;
         boolean repetir = true;
 
+        String message = (new StringBuilder("\n--------------------------------------------------\n")
+                .append("Welcome to the video club. What do you want to do?\n")
+                .append("1. Show all films.\n")
+                .append("2. Look for film.\n")
+                .append("3. Look for films in a category.\n"))
+                .append("4. Add a new film\n")
+                .append("5. Close the program.\n")
+                .toString();
+
         do{
-            falloLectura = false;
-            System.out.println();
-            System.out.println("--------------------------------------------------");
-            System.out.println("Welcome to the video club. What do you want to do?");
-            System.out.println("1. Show all films.");
-            System.out.println("2. Look for film.");
-            System.out.println("3. Look for films in a category.");
-            System.out.println("4. Add a new film.");
-            System.out.println("5. Close the program.");
+            posibleOption = true;
 
-            try {
-                userSelection = sc.nextInt();
-                System.out.println("User selection: "+userSelection);
-                sc.nextLine();
+            userSelection = readInt(sc, message, "Please type a number.");
 
-                if(userSelection > 5 || userSelection < 1){
-                    falloLectura = true;
-                    System.out.println("Please just type a number between the avaibale options");
-                }
-            }catch (InputMismatchException e){
-                falloLectura = true;
-                System.out.println("--------------------------------------------------");
-                System.out.println("Please type a number.");
-                sc.nextLine();
+            if(userSelection > 5 || userSelection < 1){
+                posibleOption = false;
+                System.out.println("Please just type a number between the avaibale options");
             }
-        }while(falloLectura);
+        }while(!posibleOption);
 
         if (userSelection == 5){
             repetir = false;
+        } else if(userSelection == 1){
+
+        }else if(userSelection == 2){
+
+        }else if(userSelection == 3){
+
+        }else if(userSelection == 4){
+
         }
 
         return repetir;
+    }
+
+    public static int readInt(Scanner sc, String message, String errorMessage){
+        int readedNumber = 0;
+        boolean repeatQuestion = false;
+
+        do {
+            repeatQuestion = false;
+            try{
+                System.out.println(message);
+                readedNumber = sc.nextInt();
+                sc.nextLine();
+            } catch (InputMismatchException e) {
+                sc.nextLine();
+                repeatQuestion = true;
+                System.out.println(errorMessage);
+            }
+        }while (repeatQuestion);
+
+        return readedNumber;
     }
 
     public List<Pelicula> filtrarPorRate(double rate) {
