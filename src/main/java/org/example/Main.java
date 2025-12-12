@@ -43,7 +43,7 @@ public class Main {
         String message = (new StringBuilder("\n--------------------------------------------------\n")
                 .append("Welcome to the video club. What do you want to do?\n")
                 .append("1. Show all films.\n")
-                .append("2. Look for film.\n")
+                .append("2. Look for a film.\n")
                 .append("3. Look for films in a category.\n"))
                 .append("4. Add a new film\n")
                 .append("5. Close the program.\n")
@@ -60,15 +60,26 @@ public class Main {
             }
         }while(!posibleOption);
 
-        if (userSelection == 5){
+        if (userSelection == 5){ // 5. Close the program
             repetir = false;
-        } else if(userSelection == 1){
+        } else if(userSelection == 1){ // 1. Show all films.
 
-        }else if(userSelection == 2){
+        }else if(userSelection == 2){ // 2. Look for a film.
 
-        }else if(userSelection == 3){
-
-        }else if(userSelection == 4){
+        }else if(userSelection == 3){ // 3. Look for films in a category.
+            List<Pelicula> pelisFiltradas = filtrarPorCategoria(readString(sc, "What's the category you want to look for?", "There is some issue with what you have typed, please try again"));
+            if(pelisFiltradas.size() == 0){
+                System.out.println("There is no films about this category");
+            } else{
+                pelisFiltradas.forEach(peli -> {
+                    System.out.println("Título: " + peli.name);
+                    System.out.println("Rate: " + peli.rate);
+                    System.out.println("Categoría: " + peli.category);
+                    System.out.println("Descripción: " + peli.description);
+                    System.out.println("-------------------------------");
+                });
+            }
+        }else if(userSelection == 4){ // 4. Add a new film
             peliculas.add(new Pelicula(
                     readString(sc, "What's the name of the film?", "An error has happened please try again"),
                     readDouble(sc, "What's the score of the film?", "Must be a number with decimals for example 6.7"),
