@@ -1,7 +1,9 @@
 package org.example;
 
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.List;
+import java.util.Scanner;
 
 public class Main {
     static List<Pelicula> peliculas = new ArrayList<>();
@@ -23,7 +25,74 @@ public class Main {
         peliculas.add(new Pelicula("Titanic", 7.9,"Drama", "Una historia de amor florece a bordo del famoso barco condenado."));
         peliculas.add(new Pelicula("The Avengers", 8.0,"Superheroes","Un grupo de héroes debe unirse para salvar al mundo de una amenaza alienígena."));
 
+        Scanner sc = new Scanner(System.in);
+        boolean repeat = true;
 
+        while (repeat){
+            repeat = userUI(sc);
+        }
+
+        sc.close();
+    }
+
+    public static boolean userUI(Scanner sc){
+        int userSelection = 0;
+        boolean posibleOption = true;
+        boolean repetir = true;
+
+        String message = (new StringBuilder("\n--------------------------------------------------\n")
+                .append("Welcome to the video club. What do you want to do?\n")
+                .append("1. Show all films.\n")
+                .append("2. Look for film.\n")
+                .append("3. Look for films in a category.\n"))
+                .append("4. Add a new film\n")
+                .append("5. Close the program.\n")
+                .toString();
+
+        do{
+            posibleOption = true;
+
+            userSelection = readInt(sc, message, "Please type a number.");
+
+            if(userSelection > 5 || userSelection < 1){
+                posibleOption = false;
+                System.out.println("Please just type a number between the avaibale options");
+            }
+        }while(!posibleOption);
+
+        if (userSelection == 5){
+            repetir = false;
+        } else if(userSelection == 1){
+
+        }else if(userSelection == 2){
+
+        }else if(userSelection == 3){
+
+        }else if(userSelection == 4){
+
+        }
+
+        return repetir;
+    }
+
+    public static int readInt(Scanner sc, String message, String errorMessage){
+        int readedNumber = 0;
+        boolean repeatQuestion = false;
+
+        do {
+            repeatQuestion = false;
+            try{
+                System.out.println(message);
+                readedNumber = sc.nextInt();
+                sc.nextLine();
+            } catch (InputMismatchException e) {
+                sc.nextLine();
+                repeatQuestion = true;
+                System.out.println(errorMessage);
+            }
+        }while (repeatQuestion);
+
+        return readedNumber;
     }
 
     public List<Pelicula> filtrarPorRate(double rate) {
