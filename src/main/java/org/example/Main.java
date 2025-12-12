@@ -43,7 +43,7 @@ public class Main {
         String message = (new StringBuilder("\n--------------------------------------------------\n")
                 .append("Welcome to the video club. What do you want to do?\n")
                 .append("1. Show all films.\n")
-                .append("2. Look for film.\n")
+                .append("2. Look for a film.\n")
                 .append("3. Look for films in a category.\n"))
                 .append("4. Add a new film\n")
                 .append("5. Close the program.\n")
@@ -68,15 +68,6 @@ public class Main {
             String nombre = readString(sc, "Type the film name:", "Please enter a valid text.");
 
             List<Pelicula> resultado = filtrarPorNombre(peliculas, nombre);
-
-            if (resultado.isEmpty()) {
-                System.out.println("No films found with that name.");
-            } else {
-                System.out.println("\n=== RESULTS ===");
-                for (Pelicula p : resultado) {
-                    System.out.println(p);
-                }
-            }
         }else if(userSelection == 3){ // 3. Look for films in a category.
             List<Pelicula> pelisFiltradas = filtrarPorCategoria(readString(sc, "What's the category you want to look for?", "There is some issue with what you have typed, please try again"));
             if(pelisFiltradas.isEmpty()){
@@ -175,14 +166,25 @@ public class Main {
     }
 
     public static List<Pelicula> filtrarPorNombre(List<Pelicula> pelis, String nombreBuscado) {
-
         List<Pelicula> resultado = new ArrayList<>();
+        boolean encontrada = false;
 
         for (Pelicula p : pelis) {
             // Usamos equalsIgnoreCase para ignorar mayúsculas/minúsculas
             if (p.name.equalsIgnoreCase(nombreBuscado)) {
-                resultado.add(p);
+                System.out.println("------------");
+                System.out.println("Título: " + p.name);
+                System.out.println("Rate: " + p.rate);
+                System.out.println("Categoría: " + p.category);
+                System.out.println("Descripción: " + p.description);
+
+                encontrada = true;
+                resultado.add(new Pelicula(p.name, p.rate, p.category, p.description));
             }
+        }
+
+        if (!encontrada) {
+            System.out.println("No films found with that name.");
         }
 
         return resultado;
