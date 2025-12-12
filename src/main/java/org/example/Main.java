@@ -68,7 +68,7 @@ public class Main {
 
         }else if(userSelection == 3){ // 3. Look for films in a category.
             List<Pelicula> pelisFiltradas = filtrarPorCategoria(readString(sc, "What's the category you want to look for?", "There is some issue with what you have typed, please try again"));
-            if(pelisFiltradas.size() == 0){
+            if(pelisFiltradas.isEmpty()){
                 System.out.println("There is no films about this category");
             } else{
                 pelisFiltradas.forEach(peli -> {
