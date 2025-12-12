@@ -63,8 +63,21 @@ public class Main {
         if (userSelection == 5){
             repetir = false;
         } else if(userSelection == 1){
+            mostrarPeliculas();
 
         }else if(userSelection == 2){
+            String nombre = readString(sc, "Type the film name:", "Please enter a valid text.");
+
+            List<Pelicula> resultado = filtrarPorNombre(peliculas, nombre);
+
+            if (resultado.isEmpty()) {
+                System.out.println("No films found with that name.");
+            } else {
+                System.out.println("\n=== RESULTS ===");
+                for (Pelicula p : resultado) {
+                    System.out.println(p);
+                }
+            }
 
         }else if(userSelection == 3){
 
