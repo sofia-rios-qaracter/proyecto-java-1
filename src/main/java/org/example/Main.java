@@ -60,7 +60,7 @@ public class Main {
             }
         }while(!posibleOption);
 
-        if (userSelection == 5){
+        if (userSelection == 5){ // 5. Close the program
             repetir = false;
         } else if(userSelection == 1){
             mostrarPeliculas();
@@ -80,11 +80,31 @@ public class Main {
             }
 
         }else if(userSelection == 3){
+        } else if(userSelection == 1){ // 1. Show all films.
 
-        }else if(userSelection == 4){
+        }else if(userSelection == 2){ // 2. Look for a film.
 
+        }else if(userSelection == 3){ // 3. Look for films in a category.
+            List<Pelicula> pelisFiltradas = filtrarPorCategoria(readString(sc, "What's the category you want to look for?", "There is some issue with what you have typed, please try again"));
+            if(pelisFiltradas.size() == 0){
+                System.out.println("There is no films about this category");
+            } else{
+                pelisFiltradas.forEach(peli -> {
+                    System.out.println("Título: " + peli.name);
+                    System.out.println("Rate: " + peli.rate);
+                    System.out.println("Categoría: " + peli.category);
+                    System.out.println("Descripción: " + peli.description);
+                    System.out.println("-------------------------------");
+                });
+            }
+        }else if(userSelection == 4){ // 4. Add a new film
+            peliculas.add(new Pelicula(
+                    readString(sc, "What's the name of the film?", "An error has happened please try again"),
+                    readDouble(sc, "What's the score of the film?", "Must be a number with decimals for example 6.7"),
+                    readString(sc, "What category is in?", "Must be a String"),
+                    readString(sc, "What's the description of this film?", "Must be a String")
+            ));
         }
-
         return repetir;
     }
 
@@ -108,6 +128,26 @@ public class Main {
         return readedNumber;
     }
 
+    public static double readDouble(Scanner sc, String message, String errorMessage){
+        double readedNumber = 0;
+        boolean repeatQuestion = false;
+
+        do {
+            repeatQuestion = false;
+            try{
+                System.out.println(message);
+                readedNumber = sc.nextDouble();
+                sc.nextLine();
+            } catch (InputMismatchException e) {
+                sc.nextLine();
+                repeatQuestion = true;
+                System.out.println(errorMessage);
+            }
+        }while (repeatQuestion);
+
+        return readedNumber;
+    }
+
     public static String readString(Scanner sc, String message, String errorMessage){
         StringBuilder readedText = new StringBuilder();
         boolean repeatQuestion = false;
@@ -117,10 +157,10 @@ public class Main {
             try{
                 readedText.setLength(0);
                 System.out.println(message);
-                readedText.append(sc.next());
-                sc.nextLine();
+                readedText.append(sc.nextLine());
+                //sc.nextLine();
             } catch (InputMismatchException e) {
-                sc.nextLine();
+                //sc.nextLine();
                 repeatQuestion = true;
                 System.out.println(errorMessage);
             }
@@ -129,7 +169,7 @@ public class Main {
         return readedText.toString();
     }
 
-    public List<Pelicula> filtrarPorRate(double rate) {
+    public static List<Pelicula> filtrarPorRate(double rate) {
         List<Pelicula> resultado = new ArrayList<>();
 
         for (Pelicula p : peliculas) {
@@ -141,7 +181,7 @@ public class Main {
         return resultado;
     }
 
-    public List<Pelicula> filtrarPorNombre(List<Pelicula> pelis, String nombreBuscado) {
+    public static List<Pelicula> filtrarPorNombre(List<Pelicula> pelis, String nombreBuscado) {
 
         List<Pelicula> resultado = new ArrayList<>();
 
@@ -155,7 +195,7 @@ public class Main {
         return resultado;
     }
 
-    public List<Pelicula> filtrarPorCategoria(String categoriaBuscada) {
+    public static List<Pelicula> filtrarPorCategoria(String categoriaBuscada) {
 
         List<Pelicula> resultado = new ArrayList<>();
 
@@ -169,7 +209,7 @@ public class Main {
         return resultado;
     }
 
-    public void mostrarPeliculas() {
+    public static void mostrarPeliculas() {
         System.out.println("\n===== LISTA DE PELÍCULAS =====");
 
         for (Pelicula p : peliculas) {
