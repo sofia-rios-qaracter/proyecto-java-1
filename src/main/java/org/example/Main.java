@@ -95,6 +95,27 @@ public class Main {
         return readedNumber;
     }
 
+    public static String readString(Scanner sc, String message, String errorMessage){
+        StringBuilder readedText = new StringBuilder();
+        boolean repeatQuestion = false;
+
+        do {
+            repeatQuestion = false;
+            try{
+                readedText.setLength(0);
+                System.out.println(message);
+                readedText.append(sc.next());
+                sc.nextLine();
+            } catch (InputMismatchException e) {
+                sc.nextLine();
+                repeatQuestion = true;
+                System.out.println(errorMessage);
+            }
+        }while (repeatQuestion);
+
+        return readedText.toString();
+    }
+
     public List<Pelicula> filtrarPorRate(double rate) {
         List<Pelicula> resultado = new ArrayList<>();
 
