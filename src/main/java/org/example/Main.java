@@ -56,16 +56,15 @@ public class Main {
 
             if(userSelection > 5 || userSelection < 1){
                 posibleOption = false;
-                System.out.println("Please just type a number between the avaibale options");
+                System.out.println("Please just type a number between the available options");
             }
         }while(!posibleOption);
 
         if (userSelection == 5){ // 5. Close the program
             repetir = false;
-        } else if(userSelection == 1){
+        } else if(userSelection == 1){ // 1. Show all films.
             mostrarPeliculas();
-
-        }else if(userSelection == 2){
+        }else if(userSelection == 2){ // 2. Look for a film.
             String nombre = readString(sc, "Type the film name:", "Please enter a valid text.");
 
             List<Pelicula> resultado = filtrarPorNombre(peliculas, nombre);
@@ -78,12 +77,6 @@ public class Main {
                     System.out.println(p);
                 }
             }
-
-        }else if(userSelection == 3){
-        } else if(userSelection == 1){ // 1. Show all films.
-
-        }else if(userSelection == 2){ // 2. Look for a film.
-
         }else if(userSelection == 3){ // 3. Look for films in a category.
             List<Pelicula> pelisFiltradas = filtrarPorCategoria(readString(sc, "What's the category you want to look for?", "There is some issue with what you have typed, please try again"));
             if(pelisFiltradas.isEmpty()){
